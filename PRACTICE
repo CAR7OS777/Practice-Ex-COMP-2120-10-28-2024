@@ -1,0 +1,134 @@
+1.import java.util.Scanner;
+
+public class CellPhoneService {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter talk minutes: ");
+        int minutes = input.nextInt();
+
+        System.out.print("Enter text messages: ");
+        int texts = input.nextInt();
+
+        System.out.print("Enter gigabytes of data: ");
+        double data = input.nextDouble();
+
+        String plan = "";
+        double cost = 0;
+
+        if (minutes < 500 && texts == 0 && data == 0) {
+            plan = "A";
+            cost = 49;
+        } else if (minutes < 500 && texts > 0 && data == 0) {
+            plan = "B";
+            cost = 55;
+        } else if (minutes >= 500 && data == 0) {
+            if (texts <= 100) {
+                plan = "C";
+                cost = 61;
+            } else {
+                plan = "D";
+                cost = 70;
+            }
+        } else if (data > 0) {
+            if (data <= 3) {
+                plan = "E";
+                cost = 79;
+            } else {
+                plan = "F";
+                cost = 87;
+            }
+        }
+
+        System.out.println("The best plan for your needs is Plan " + plan + " at $" + cost + " per month.");
+    }
+}
+
+Pseudocode
+Prompt user for talk minutes, text messages, and gigabytes of data.
+Determine the best plan based on the input values.
+Display the recommended plan and its cost.
+Flowchart
+Start
+Input talk minutes, text messages, gigabytes of data
+Decision: talk minutes < 500 and text messages == 0 and data == 0
+Yes: Plan A
+No: Next decision
+Decision: talk minutes < 500 and text messages > 0 and data == 0
+Yes: Plan B
+No: Next decision
+Decision: talk minutes >= 500 and data == 0
+Yes: Next decision
+No: Next decision
+Decision: text messages <= 100
+Yes: Plan C
+No: Plan D
+Decision: data > 0 and data <= 3
+Yes: Plan E
+No: Plan F
+Display recommended plan and cost
+End
+
+2.import java.util.Scanner;
+
+public class AcmePay {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("Enter hours worked: ");
+        double hours = input.nextDouble();
+
+        System.out.print("Enter shift (1, 2, or 3): ");
+        int shift = input.nextInt();
+
+        double hourlyRate = 0;
+        if (shift == 1) {
+            hourlyRate = 17;
+        } else if (shift == 2) {
+            hourlyRate = 18.5;
+        } else if (shift == 3) {
+            hourlyRate = 22;
+        }
+
+        boolean retirement = false;
+        if (shift == 2 || shift == 3) {
+            System.out.print("Elect retirement plan? (true/false): ");
+            retirement = input.nextBoolean();
+        }
+
+        double regularPay = Math.min(hours, 40) * hourlyRate;
+        double overtimePay = Math.max(0, hours - 40) * hourlyRate * 1.5;
+        double totalPay = regularPay + overtimePay;
+        double retirementDeduction = retirement ? totalPay * 0.03 : 0;
+        double netPay = totalPay - retirementDeduction;
+
+        System.out.println("Hours worked: " + hours);
+        System.out.println("Shift: " + shift);
+        System.out.println("Hourly rate: $" + hourlyRate);
+        System.out.println("Regular pay: $" + regularPay);
+        System.out.println("Overtime pay: $" + overtimePay);
+        System.out.println("Total pay: $" + totalPay);
+        System.out.println("Retirement deduction: $" + retirementDeduction);
+        System.out.println("Net pay: $" + netPay);
+    }
+}
+
+Pseudocode
+Prompt user for hours worked and shift.
+If shift is 2 or 3, ask if the worker elects retirement.
+Calculate regular pay, overtime pay, and total pay.
+Calculate retirement deduction if applicable.
+Display all the required information.
+Flowchart
+Start
+Input hours worked, shift
+Decision: shift == 2 or shift == 3
+Yes: Input retirement election
+No: Skip
+Calculate regular pay and overtime pay
+Calculate total pay
+Decision: retirement elected
+Yes: Calculate retirement deduction
+No: Skip
+Display hours worked, shift, hourly rate, regular pay, overtime pay, total pay, retirement deduction, net pay
+End
